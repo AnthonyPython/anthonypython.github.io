@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&family=Roboto+Mono:ital,wght@0,500;1,500&family=Ubuntu:wght@400;700&display=swap');
+
+
+body{
+    overflow-x: hidden;
+    font-family: 'Roboto Mono', sans-serif;
+    color: #505962;
+}
+
+.navbar{
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.video-background{
+    position: relative;
+    width : 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.image-wrap{
+    position: relative;
+    width : 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.caption{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    color: white
+
+}
+
+.caption-WNM{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+
+}
+
+.caption-WNM h1{
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: .2rem;
+    text-shadow: .1rem .1rem .8rem white;
+    padding-bottom: 1rem;
+    color: purple;
+
+}
+
+.caption-WNM h3{
+    font-size: 2rem;
+    text-shadow: .1rem .1rem .5rem white;
+    color: red;
+
+}
+
+.caption-WNM h4{
+    font-size: 2rem;
+    text-shadow: .1rem .1rem .5rem white;
+    color: red;
+
+}
+
+.Para{
+
+    color: white;
+
+}
+
+.caption-Cru{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    color: white;
+
+}
+
+.caption-Cru h1{
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: .2rem;
+    text-shadow: .1rem .1rem .8rem white;
+    padding-bottom: 1rem;
+
+
+}
+
+.caption-Cru h3{
+    font-size: 2rem;
+    text-shadow: .1rem .1rem .5rem white;
+    color: orange;
+
+}
+
+.caption-list{
+    position: absolute;
+    top: 38%;
+    width: 100%;
+    color: white;
+    text-shadow: .1rem .1rem .8rem black;
+}
+
+
+.caption h1{
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: .2rem;
+    text-shadow: .1rem .1rem .8rem green;
+    padding-bottom: 1rem;
+
+}
+
+.caption h3{
+    font-size: 2rem;
+    text-shadow: .1rem .1rem .5rem green;
+
+}
+
+@media (max-width: 768px){
+    .caption h1{
+        font-size: 1.4rem;
+        letter-spacing: .15rem;
+        text-shadow: .1rem .1rem .8rem green;
+        padding-bottom: .5rem;
+
+    }
+
+    .caption h3{
+        font-size: 1.0rem;
+        text-shadow: .1rem .1rem .5rem green;
+
+    }
+
+    .caption-WNM h1{
+        font-size: 1.4rem;
+        letter-spacing: .15rem;
+        text-shadow: .1rem .1rem .8rem white;
+        padding-bottom: .5rem;
+
+    }
+
+    .caption-WNM h3{
+        font-size: 1.0rem;
+        text-shadow: .1rem .1rem .5rem white;
+
+    }
+
+    .caption-WNM h4{
+        font-size: 1.0rem;
+        text-shadow: .1rem .1rem .5rem white
+
+    }
+
+    .Para{
+
+        color: white;
+
+    }
+
+    .caption-Cru h1{
+        font-size: 1.4rem;
+        letter-spacing: .15rem;
+        text-shadow: .1rem .1rem .8rem white;
+        padding-bottom: .5rem;
+
+    }
+
+    .caption-Cru h3{
+        font-size: 1.0rem;
+        text-shadow: .1rem .1rem .5rem white;
+
+    }
+
+
+    .image-wrap{
+        position: relative;
+        width : 50%;
+        min-height: 50%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .caption-list{
+        position: absolute;
+        top: 38%;
+        width: 100%;
+        color: white;
+        font-size: 1.4rem;
+    }
+
+}

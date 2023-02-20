@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>Stephen's World</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">SH</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Projects
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="1.html">Crucible</a></li>
+                      <li><a class="dropdown-item" href="2.html">WNM Land of the roses</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="about.html" role="button">About me</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          <div class="image-wrap">
+            <img src="chalkboard.jpg" alt="Chalk board">
+          </div>
+
+          <div class="caption-Cru text-center">
+            <h1>Crucible</h1>
+            <h3>Engine</h3>
+
+            <p>Crucible is all about providing helpful components and tools to developers with my own needs and wants for my workflow.</p>
+
+            <p>
+              <br>
+              History:
+              <br>
+            </p>
+
+
+
+            <p>We start back into about the year 2017, I decided I wanted to try making an engine.
+              Usually every game devs mistake when they intend to just make a game.
+            </p>
+            <p>Well I was moviated enough not to just make a game, but I wanted to learn how engine's worked.
+              Develop my own understanding of the basis of a game engine that we take for granted every day as a game developer.
+              So at the time I had a mac book 2010 I worked on, The end result was me having learned to make a 3d engine using open GL.
+              I learned how to import obj's, render them, and apply texture's with shader's and binding them to a slot.
+              Did fog, then to terrain, I ended up becoming burnt out from all the learning, and motivation had died down. How ever I added in terrain masking before doing so, and adding a height map for it.
+
+              It was called prime.
+
+            </p>
+
+            <p>
+              The next version I had dumped 3d entirly and started to learn and work on a OpenGL RPG game.
+              This did not go that far, but I had moving sprites and basic 2d collison checking with tiles.
+              I called this one RPG0
+            </p>
+
+            <p>
+              Fast forward to 2021/2022 after I had went into other area's of intrest such as PCB design and 3d printing.
+              I have once again became intrested in working on my own engine again.
+              I have always wanted engine with a familir enough environment when I work in the source engine by valve.
+              This is what my intial goal was, and well to a certain extend still is.
+            </p>
+            <p>
+              In 2022 I started help working on a project named Copper-source by a user named kleadron.
+              The intent here was to create Gold source like engine with more modern C#, I implemented a basic Enity Component System.
+              It then moved into a Quake 3 way instead of gold src era.
+              This was due to more flexable brush work was able to be done than what gold src could do.
+              Some feature's the original had already, wad reading support, leaf support, reading compiled Hl1 and alpha bsp's. hacky fake glass rendering.
+            </p>
+              Kleadron has since moved on with a newer private project with redone code. As Copper-Source was the first attempt.
+
+            <p>
+              <br>
+              --More Current--
+            </p>
+              <br>
+              It started out me refreshing with OpenGL created a more complex engine and framework with working IK, and a Entity Compoent System.
+              This crude first iteration, but functional was called Crimengine-pc.
+              The reason behind this name was Orginally a user named Crimester, He was attempting to create a PSX engine called Crimengine and so thats where -pc came from.
+              He was creating it in C, with all that comes with C, pain.
+              PSX debugging is also not as developer friendly.
+
+
+              <p>
+              He moved on eventually with a new project aimed at it.
+              </p>
+              <br>
+              --Version 2--
+              <p>
+              <br>
+              This was called CrimEngine-Dx11.
+              I started working on converting The Engine base to compile and work on Visual Studio with DirectX11.
+              The original project was working in Dev C++ with mingw.(wasn't my choice)
+
+              As I had no other choice to do so because mingw was giving problems related to templates and had to start doing dumb hacks to make it compile.
+              I was just fed up with it at this point and decided to move it over to Visual Studio and go to DirectX11 Because i no longer wanted to support OpenGL.
+
+              I was scucessful but being a technical artist was not my strong suit.
+
+              So I decided to go with Wicked-engine's rendering system and job system as my new Basis.
+
+              I didn't want to deal with that sort of framework anymore from scratch as I had implemented at this point three Rendering API's and each time I disliked it that much more.
+            </p>
+              <p>
+              <br>
+              --Version 3--
+              <br>
+              </p>
+              This is now the current version, it has had a name change to Crucible currently, and uses a mish mash of wicked-engine code with various third-party library's
+              Including but not limited to Mono-C#, OpenFBX, and Soon Webm, and FMOD.
+
+
+
+
+          </div>
+
+
+
+    </body>
+</html>
