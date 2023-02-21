@@ -189,5 +189,12 @@ body{
         color: white;
         font-size: 1.4rem;
     }
+	
+	.video-background{
+    position: relative;
+    width : 50%;
+    min-height: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
 
 }
