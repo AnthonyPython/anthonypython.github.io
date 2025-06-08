@@ -1,0 +1,363 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html>
+<head>
+  <title>Pizzeria of the Damned</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    canvas { border: 2px solid #ff5555; }
+  </style>
+</head>
+<body>
+<script>
+let player;
+let stations = [];
+let currentOrder = null;
+let ingredients = ['Thin Dough', 'Normal Dough', 'Thick Dough', 'Sauce', 'Cheese', 'Pepperoni', 'Shadow Essence', 'Blood Sauce', 'Ghost Peppers'];
+let playerInventory = null;
+let preparedPizza = [];
+let pizzaInOven = null;
+let score = 0;
+let stability = 100;
+let flicker = 255;
+let flickerTimer = 0;
+let shiftTimer = 540 * 60; // 9 minutes
+let inGameHour = 0;
+let orderTimer = 50 * 60; // 50 seconds per order
+let spill = null;
+let spillTimer = 0;
+let baking = false;
+let bakeTimer = 0;
+let hasMop = false;
+let shift = 1;
+let afterHours = false;
+
+function setup() {
+  createCanvas(800, 600);
+  textAlign(CENTER);
+  textSize(20);
+  player = { x: 400, y: 300, size: 20, speed: 3 };
+  stations = [
+    { x: 100, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Thin Dough' },
+    { x: 160, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Normal Dough' },
+    { x: 220, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Thick Dough' },
+    { x: 280, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Sauce' },
+    { x: 340, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Cheese' },
+    { x: 400, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Pepperoni' },
+    { x: 460, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Shadow Essence' },
+    { x: 520, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Blood Sauce' },
+    { x: 580, y: 100, w: 50, h: 50, type: 'ingredient', ingredient: 'Ghost Peppers' },
+    { x: 300, y: 300, w: 60, h: 60, type: 'prepare' },
+    { x: 500, y: 400, w: 60, h: 60, type: 'oven' },
+    { x: 600, y: 500, w: 100, h: 50, type: 'serve' },
+    { x: 100, y: 400, w: 50, h: 50, type: 'clean' },
+    { x: 700, y: 50, w: 50, h: 50, type: 'exit' }
+  ];
+  generateOrder();
+}
+
+function draw() {
+  updateTimers();
+  updatePlayer();
+  drawBackground();
+  drawStations();
+  drawSpill();
+  drawPlayer();
+  drawUI();
+  checkFailures();
+  generateSpills();
+  handleAfterHours();
+}
+
+function updateTimers() {
+  flickerTimer++;
+  if (!afterHours) {
+    shiftTimer--;
+    if (shiftTimer % (90 * 60) === 0) inGameHour = min(5, floor((540 * 60 - shiftTimer) / (90 * 60)));
+    orderTimer--;
+  }
+  if (spill) spillTimer--;
+  if (baking) bakeTimer--;
+}
+
+function updatePlayer() {
+  let newX = player.x;
+  let newY = player.y;
+  if (keyIsDown(87) || keyIsDown(UP_ARROW)) newY -= player.speed;
+  if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) newY += player.speed;
+  if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) newX -= player.speed;
+  if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) newX += player.speed;
+  player.x = constrain(newX, 50, 750);
+  player.y = constrain(newY, 50, 550);
+}
+
+function drawBackground() {
+  if (flickerTimer > 30) {
+    flicker = stability > 70 ? random(200, 255) : stability > 30 ? random(100, 255) : random(50, 255);
+    flickerTimer = 0;
+  }
+  background(30);
+  let glitchOffset = stability <= 30 ? random(-10, 10) : stability <= 70 ? random(-5, 5) : 0;
+  translate(glitchOffset, glitchOffset);
+  tint(255, afterHours ? 150 : flicker);
+  fill(70);
+  rect(0, 0, width, height);
+  fill(150, 0, 0);
+  rect(50, 50, 700, 500);
+}
+
+function drawStations() {
+  for (let s of stations) {
+    if (s.type === 'ingredient') fill(255, 255, 0);
+    else if (s.type === 'prepare') fill(200, 200, 200);
+    else if (s.type === 'oven') fill(200, 50, 50);
+    else if (s.type === 'serve') fill(50, 200, 50);
+    else if (s.type === 'clean') fill(0, 255, 255);
+    else if (s.type === 'exit') fill(100, 100, 100);
+    rect(s.x, s.y, s.w, s.h);
+    if (s.ingredient) {
+      fill(0);
+      textSize(12);
+      text(s.ingredient, s.x + s.w / 2, s.y + s.h / 2 + 5);
+      textSize(20);
+    } else if (s.type === 'exit') {
+      fill(255);
+      textSize(12);
+      text('Exit', s.x + s.w / 2, s.y + s.h / 2 + 5);
+      textSize(20);
+    }
+  }
+}
+
+function drawSpill() {
+  if (spill) {
+    fill(0, 255, 0);
+    ellipse(spill.x, spill.y, 30, 30);
+    fill(255);
+    text(`Clean! (${ceil(spillTimer / 60)}s)`, spill.x, spill.y - 20);
+  }
+}
+
+function drawPlayer() {
+  noTint();
+  fill(hasMop ? 0 : 255, 0, 0);
+  rect(player.x - player.size / 2, player.y - player.size / 2, player.size, player.size);
+  if (playerInventory) {
+    fill(255);
+    text(playerInventory, player.x, player.y - 30);
+  } else if (hasMop) {
+    fill(255);
+    text('Mop Equipped', player.x, player.y - 30);
+  }
+}
+
+function drawUI() {
+  fill(255);
+  text(`Tips: $${score}`, 100, 30);
+  fill(stability > 70 ? 255 : stability > 30 ? [255, 255, 0] : [255, 0, 0]);
+  text(`Stability: ${stability}`, 700, 30);
+  text(`Shift: ${shift}`, 400, 30);
+  if (!afterHours && currentOrder) {
+    fill(255, 255, 0);
+    text(`Order: ${currentOrder.join(', ')}`, 400, 60);
+    let customerText = stability > 70 ? 'Hurry...' : stability > 30 ? 'They’re watching...' : 'They’re closer…';
+    text(`Customer: "${customerText}"`, 400, 90);
+    fill(255);
+    text(`Time: ${inGameHour + 12} AM`, 700, 50);
+    text(`Order Time: ${ceil(orderTimer / 60)}s`, 600, 90);
+  } else if (afterHours) {
+    fill(255, 100);
+    text('After Hours: Explore...', 400, 60);
+    if (frameCount % 300 === 0) {
+      let secret = ['A shadow moves...', 'Whispers in the dark...', 'Found: Old note: "They never left..."'][floor(random(3))];
+      text(secret, player.x, player.y - 50);
+    }
+  }
+  fill(255);
+  text(`Prepared: ${preparedPizza.join(', ')}`, 400, 180);
+  if (baking) text(`Baking: ${ceil(bakeTimer / 60)}s`, 500, 350);
+}
+
+function checkFailures() {
+  if (!afterHours && shiftTimer <= 0 && inGameHour >= 5) { // End at 6 AM
+    enterAfterHours();
+  }
+  if (!afterHours && orderTimer <= 0 && currentOrder) {
+    stability = max(0, stability - 15);
+    alert('Order timed out! A shadow looms…');
+    generateOrder();
+    orderTimer = 50 * 60;
+  }
+  if (spill && spillTimer <= 0 && !afterHours) {
+    stability = max(0, stability - 5);
+    spill = null;
+    alert('Spill uncleaned! A creak echoes…');
+  }
+  if (stability <= 0 && !afterHours) {
+    alert('Game Over: They got you…');
+    stability = 100;
+    score = 0;
+    resetOrder();
+  }
+}
+
+function generateSpills() {
+  if (!afterHours && !spill && random(1) < 0.001) {
+    spill = { x: random(100, 700), y: random(200, 350) };
+    spillTimer = 25 * 60;
+  }
+}
+
+function handleAfterHours() {
+  // No timer limit, runs until exit
+}
+
+function enterAfterHours() {
+  afterHours = true;
+  currentOrder = null;
+  playerInventory = null;
+  preparedPizza = [];
+  pizzaInOven = null;
+  baking = false;
+  bakeTimer = 0;
+}
+
+function keyPressed() {
+  if (keyCode === 69) { // 'E' to drop
+    if (playerInventory) {
+      playerInventory = null;
+    } else if (hasMop) {
+      hasMop = false;
+    }
+  } else if (keyCode === 32) { // 'Space' to interact
+    if (!playerInventory && !hasMop) { // Pick up
+      for (let s of stations) {
+        if (dist(player.x, player.y, s.x + s.w / 2, s.y + s.h / 2) < 50) {
+          if (s.type === 'ingredient') {
+            playerInventory = s.ingredient;
+          } else if (s.type === 'prepare' && preparedPizza.length > 0) {
+            playerInventory = preparedPizza.join(', ');
+            preparedPizza = [];
+          } else if (s.type === 'oven' && baking && bakeTimer <= 0) {
+            playerInventory = pizzaInOven;
+            pizzaInOven = null;
+            baking = false;
+            bakeTimer = 0;
+          } else if (s.type === 'clean') {
+            hasMop = true;
+          } else if (s.type === 'exit' && afterHours) {
+            shift++;
+            stability = 100;
+            score = 0;
+            shiftTimer = 540 * 60;
+            inGameHour = 0;
+            afterHours = false;
+            generateOrder();
+          }
+        }
+      }
+    } else if (playerInventory) { // Place
+      for (let s of stations) {
+        if (dist(player.x, player.y, s.x + s.w / 2, s.y + s.h / 2) < 50) {
+          if (s.type === 'prepare') {
+            preparedPizza.push(playerInventory);
+            playerInventory = null;
+          } else if (s.type === 'oven' && !baking) {
+            pizzaInOven = playerInventory;
+            let baseTime = pizzaInOven.split(', ')[0] === 'Thin Dough' ? 5 * 60 : pizzaInOven.split(', ')[0] === 'Normal Dough' ? 7 * 60 : 10 * 60;
+            bakeTimer = baseTime + (pizzaInOven.split(', ').length - 2) * 2 * 60;
+            baking = true;
+            playerInventory = null;
+          } else if (s.type === 'serve' && !afterHours) {
+            checkOrder();
+          }
+        }
+      }
+    } else if (hasMop && spill && !afterHours) { // Clean
+      spill = null;
+      spillTimer = 0;
+      hasMop = false;
+    }
+  }
+}
+
+function generateOrder() {
+  if (!afterHours) {
+    currentOrder = [];
+    currentOrder.push(['Thin Dough', 'Normal Dough', 'Thick Dough'][floor(random(3))]);
+    currentOrder.push('Sauce');
+    let numToppings = floor(random(0, 5));
+    let availableToppings = ['Cheese', 'Pepperoni', 'Shadow Essence', 'Blood Sauce', 'Ghost Peppers'];
+    for (let i = 0; i < numToppings; i++) {
+      currentOrder.push(availableToppings[floor(random(availableToppings.length))]);
+    }
+    orderTimer = 50 * 60;
+  }
+}
+
+function checkOrder() {
+  if (!afterHours && playerInventory === currentOrder.join(', ')) {
+    score += 10;
+    playerInventory = null;
+    generateOrder();
+    orderTimer = 50 * 60;
+  } else if (!afterHours) {
+    stability = max(0, stability - 10);
+    alert(stability > 30 ? 'Wrong order! Eyes glow…' : 'Wrong order! Shadows close in…');
+    playerInventory = null;
+    generateOrder();
+    orderTimer = 50 * 60;
+  }
+}
+
+function resetOrder() {
+  playerInventory = null;
+  preparedPizza = [];
+  pizzaInOven = null;
+  baking = false;
+  bakeTimer = 0;
+  generateOrder();
+  orderTimer = 50 * 60;
+}
+</script>
+</body>
+</html>
