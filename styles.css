@@ -163,7 +163,7 @@ body{
     .caption-Cru h1{
         font-size: 1.4rem;
         letter-spacing: .15rem;
-        text-shadow: .1rem .1rem .8rem white;
+        text-shadow: .1rem .1rem .8rem rgb(255, 0, 0);
         padding-bottom: .5rem;
 
     }
