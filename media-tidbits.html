@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>The Bunny Butcher</title>
+        <style>
+            body {
+                position: relative;
+            }
+            .toc-sidebar {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+            /* Smooth scrolling for anchor links */
+            html { scroll-behavior: smooth; }
+        </style>
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="100">
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">AP</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Projects
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="1.html">Crucible</a></li>
+                      <li><a class="dropdown-item" href="2.html">The Bunny Butcher</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="about.html" role="button">About me</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          
+
+          <!-- Floating Menu Button -->
+          <button class="btn btn-dark btn-toc-toggle d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocSidebar" aria-controls="tocSidebar">
+            <span class="fs-4">☰</span>
+          </button>
+
+          <!-- Collapsible Sidebar (Offcanvas) -->
+          <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="tocSidebar" aria-labelledby="tocSidebarLabel">
+            <div class="offcanvas-header border-bottom border-secondary">
+              <h5 class="offcanvas-title" id="tocSidebarLabel">Media Navigation</h5>
+              <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <!-- Story Switcher Dropdown -->
+              <div class="dropdown mb-4">
+                <label class="small text-muted mb-2 d-block">SWITCH STORY</label>
+                <button class="btn btn-outline-light dropdown-toggle w-100 text-start" type="button" id="storySelector" data-bs-toggle="dropdown" aria-expanded="false">
+                  Bunny Butcher
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="storySelector">
+                  <!--<li><a class="dropdown-item" href="media-tidbits.html">The Awaking</a></li>-->
+                </ul>
+              </div>
+
+              <!-- Table of Contents Links -->
+              <label class="small text-muted mb-2 d-block">CHAPTERS</label>
+              <nav id="toc" class="nav nav-pills flex-column">
+                <a class="nav-link text-light mb-1" href="#title">Title</a>
+                <a class="nav-link text-light mb-1" href="#act-1">Act 1</a>
+                <a class="nav-link text-light mb-1" href="#act-2">Act 2</a>
+                <!-- <a class="nav-link text-light mb-1" href="#act-3">Act 3</a>
+                <a class="nav-link text-light mb-1" href="#act-4">Act 4</a>-->
+              </nav>
+            </div>
+          </div>
+
+          <div class="caption-WNM container mt-5 pb-5 bg-white bg-opacity-75 rounded shadow-sm">
+            <div id="top" class="text-center pt-5 mb-5">
+              <h1 class="display-4 fw-bold" id="title">The Bunny Butcher</h1>
+              <h2 class="h3 text-muted" >Media Tidbits</h2>
+            </div>
+
+            <div class="row justify-content-center">
+              
+              <div class="col-md-10 col-lg-8" >
+                <h3 class="h3 text-center text-muted" id="act-1">Act 1</h3>
+                <div class="card mb-5 border-dark shadow-sm"  style="background-color: #fcf9f2; font-family: 'Courier New', Courier, monospace;">
+                  <div class="card-body p-4 p-md-5">
+                    <h3 class="text-center border-bottom border-dark pb-2 mb-3">TRI-COUNTY CHRONICLE</h3>
+                    <p class="text-center small fw-bold mb-4">
+                      VOL. CVII No. 106 — WEDNESDAY, OCTOBER 14, 2003<br>
+                      PRICE: $0.50
+                    </p>
+                    
+                    <h4 class="text-center mt-4 fw-bold">THE BUNNY BUTCHER STRIKES AGAIN!</h4>
+                    <h5 class="text-center fst-italic mb-4">Fourth Victim Found Flayed in Industrial District; Police Baffled by "Mascot Slasher"</h5>
+                    
+                    <p class="fw-bold">BY ARTHUR PENDLETON</p>
+                    
+                    <p><strong>NEWARK:</strong> The city is gripping its children tighter today as the psychotic predator dubbed “The Bunny Butcher” by local tabloids has claimed a fourth victim.</p>
+                    
+                    <p>Last night, transit workers discovered the body of 24-year-old mechanic Thomas Miller, hidden in the gloom of the forsaken Sector 4 rail yard. The chilling details are indisputable. The weapon of choice, an “impossibly large, industrial-sized cleaver,” left its grotesque mark on Miller’s body, where perfect, geometric patches of skin had been systematically excised.</p>
+                    
+                    <p>A shape went through the fog, leaving everyone confused. It looked like a person in a tight rabbit suit, moving with a weird, jerky stiffness.</p>
+                    
+                    <p>"I thought it was a stunt," a local man said, shivering in his coat as reporters crowded around. "From afar, you just think it's a mascot. But then I saw the knife. It was massive—nearly as tall as me. And it didn’t even run. It just sort of pranced off into the dark. Like it was taking a bow or something."</p>
+                    
+                    <p>Police Chief Marcus Vance didn't mince words. He warned citizens to stay inside after sunset and keep an eye out for anyone fitting the suspect's bizarre description.</p>
+                    
+                    <p>“We are dealing with someone who treats these heinous acts as if they’re performances,” Vance said during an emergency press conference. “We will uncover who is behind that mask.”</p>
+                    
+                    <p class="text-center fst-italic mt-4 small">(Continued on Page A4 &mdash; See 'The History of the Abandoned Sector 4 Facility')</p>
+                  </div>
+                </div>
+                <div class="card mb-4 mt-4 border-success bg-dark text-success" style="font-family: 'Courier New', Courier, monospace;">
+                    <div class="card-body">
+                      <p class="mb-1"><strong>Date:</strong> 02/02/1987</p>
+                      <p class="mb-1"><strong>From:</strong> CEO, Vartti Toys</p>
+                      <p class="mb-1"><strong>To:</strong> All Staff</p>
+                      <p class="mb-3"><strong>Subject:</strong> Better for the future.</p>
+                      <p class="mb-0">Dear Team,</p>
+                      <p>Some significant developments for our organization had been in the works. Vartti Toys is officially merging with Locke Robotics following the securing of an investor. This funding will directly support our future development infrastructure, allowing us to move into uncharted territory and push the envelope even further than we thought possible.</p>
+                      <p>We need to address the gossip circulating in the break rooms. Some of you are claiming to see things in the closed wings late at night.</p>
+                      <p>Stay out of those halls. If your badge doesn't scan, you shouldn't be looking through the glass. Whatever irregularities you think you’re noticing are just part of the latest research cycles. Vartti has standard security protocols for a reason. Our local incident logs are checked over and wiped clean when necessary; that's purely to keep company data safe.</p>
+                      <p>The guys over at Plasacorp are making huge progress with the Organic Artificial Interfacing project right now. We are moving fast, and we need everyone focused on their own work.</p>
+                      <p>Now that is out of the way, I want to get back to the merge. I think some of you might have some concerns about what that might entail for how things are done around here! Worry no more; I am adopting a more relaxed structure that favors innovation above all else!</p>
+                      <p class="mb-0">Sincerely,</p>
+                      <p class="mb-0">Victor Locke</p>
+                      <p class="mb-0">Operations Chief, V-Tek</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+    </body>
+</html>

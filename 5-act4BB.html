@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>The Bunny Butcher</title>
+        <style>
+            body {
+                position: relative;
+            }
+            .toc-sidebar {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+            /* Smooth scrolling for anchor links */
+            html { scroll-behavior: smooth; }
+        </style>
+    </head>
+    <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="100">
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">AP</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Projects
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="1.html">Crucible</a></li>
+                      <li><a class="dropdown-item" href="2.html">The Bunny Butcher</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="about.html" role="button">About me</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          
+
+          <!-- Floating Menu Button -->
+          <button class="btn btn-dark btn-toc-toggle d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocSidebar" aria-controls="tocSidebar">
+            <span class="fs-4">☰</span>
+          </button>
+
+          <!-- Collapsible Sidebar (Offcanvas) -->
+          <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="tocSidebar" aria-labelledby="tocSidebarLabel">
+            <div class="offcanvas-header border-bottom border-secondary">
+              <h5 class="offcanvas-title" id="tocSidebarLabel">Story Navigation</h5>
+              <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <!-- Story Switcher Dropdown -->
+              <div class="dropdown mb-4">
+                <label class="small text-muted mb-2 d-block">SWITCH STORY</label>
+                <button class="btn btn-outline-light dropdown-toggle w-100 text-start" type="button" id="storySelector" data-bs-toggle="dropdown" aria-expanded="false">
+                  The Bunny Butcher
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="storySelector">
+                  <li><a class="dropdown-item" href="2.html">The hunter's final payment</a></li>
+                  <li><a class="dropdown-item active" href="3-act2BB.html">System Anomaly</a></li>
+                  <li><a class="dropdown-item" href="4-act3BB.html">The man in yellow</a></li>
+                  <li><a class="dropdown-item" href="5-act4BB.html">The Original</a></li>
+                </ul>
+              </div>
+
+              <!-- Table of Contents Links -->
+              <label class="small text-muted mb-2 d-block">CHAPTERS</label>
+              <nav id="toc" class="nav nav-pills flex-column">
+                <a class="nav-link text-light mb-1" href="#title">Title</a>
+                <!--<a class="nav-link text-light mb-1" href="#act-4">Act 4</a>
+                <a class="nav-link text-light mb-1" href="#the-elevator">The Elevator</a>
+                <a class="nav-link text-light mb-1" href="#v-tek">V-TEK Terminal</a>
+                <a class="nav-link text-light mb-1" href="#epilogue">Epilogue</a>-->
+              </nav>
+            </div>
+          </div>
+
+          <div class="caption-WNM container mt-5 pb-5 bg-white bg-opacity-75 rounded shadow-sm">
+            <div id="top" class="text-center pt-5 mb-5">
+              <h1 class="display-4 fw-bold" id="title">The Bunny Butcher</h1>
+              <h2 class="h3 text-muted" id="act-4">Act 4: The Original</h2>
+              <h0 class="h3 text-muted">By Anthony Henson</h0>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-8">
+                <div class="alert alert-warning text-center" role="alert">
+                  This chapter is currently unavailable. Please check back later for updates.
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+    </body>
+</html>

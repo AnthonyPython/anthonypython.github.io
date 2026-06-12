@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>V-TEK SYSTEMS: ARCHIVE SEARCH</title>
+    <style type="text/css">
+        body {
+            background-color: #002980;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Ctext x='50%25' y='50%25' fill='rgba(255, 255, 255, 0.07)' font-family='Arial, sans-serif' font-size='24' font-weight='bold' text-anchor='middle' transform='rotate(-45, 75, 75)'%3EV-Tek%3C/text%3E%3C/svg%3E");
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .win95-window {
+            background-color: #c0c0c0;
+            border: 2px outset #ffffff;
+            padding: 2px;
+            width: 400px;
+            box-shadow: 2px 2px 0 #000;
+        }
+        .win95-title {
+            background-color: #000080;
+            color: white;
+            padding: 3px 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .win95-content {
+            padding: 20px;
+            font-size: 13px;
+            text-align: center;
+        }
+        .win95-button {
+            background-color: #c0c0c0;
+            border: 2px outset #ffffff;
+            padding: 4px 15px;
+            cursor: pointer;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .win95-button:active {
+            border: 2px inset #ffffff;
+        }
+        #mainSearch {
+            width: 100%;
+            padding: 4px;
+            border: 2px inset #ffffff;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="win95-window">
+    <div class="win95-title"><span>Archive_Query.exe</span></div>
+    <div class="win95-content">
+        <img src="https://win95icons.com/img/search_file-1.png" alt="Search" style="margin-bottom: 10px; width: 32px; height: 32px;">
+        <br>
+        <b>Enter keywords to search the V-TEK Document Archive:</b>
+        <input type="text" id="mainSearch" placeholder="Filename or ID..." onkeydown="if(event.key==='Enter') performSearch()">
+        <br>
+        <button class="win95-button" onclick="performSearch()">Find Now</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function performSearch() {
+        var query = document.getElementById('mainSearch').value;
+        // Redirect to the archive explorer with the query as a URL parameter
+        window.location.href = 'archive.html?q=' + encodeURIComponent(query);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>V-TEK SYSTEMS: FILE ARCHIVE</title>
+    <style type="text/css">
+        body {
+            background-color: #002980;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Ctext x='50%25' y='50%25' fill='rgba(255, 255, 255, 0.07)' font-family='Arial, sans-serif' font-size='24' font-weight='bold' text-anchor='middle' transform='rotate(-45, 75, 75)'%3EV-Tek%3C/text%3E%3C/svg%3E");
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .win95-window {
+            background-color: #c0c0c0;
+            border: 2px outset #ffffff;
+            padding: 2px;
+            width: 500px;
+            box-shadow: 2px 2px 0 #000;
+        }
+        .win95-title {
+            background-color: #000080;
+            color: white;
+            padding: 3px 5px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .win95-content {
+            padding: 10px;
+        }
+        .search-box {
+            background: #eee;
+            border: 2px inset #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #file-list {
+            list-style: none;
+            padding: 0;
+            height: 250px;
+            overflow-y: scroll;
+            border: 2px inset #ffffff;
+            background-color: #ffffff;
+            margin: 0;
+        }
+        #file-list li {
+            padding: 5px 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+        #file-list li a {
+            color: #0000ee;
+            text-decoration: none;
+            display: block;
+        }
+        #file-list li a:hover {
+            background-color: #000080;
+            color: white;
+        }
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 4px;
+            border: 2px inset #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="win95-window">
+    <div class="win95-title"><span>Archive_Explorer.exe</span></div>
+    <div class="win95-content">
+        <div class="search-box">
+            <b>FILE SEARCH:</b><br>
+            <input type="text" id="searchBar" oninput="filterFiles()" placeholder="Filter results...">
+        </div>
+        <ul id="file-list">
+            <li><a href="report-template.html">Report_87A_Organic_Interface.doc</a></li>
+            <li><a href="3-act2BB.html">Memo_Locke_Merger_Final.txt</a></li>
+            <li><a href="4-act3BB.html">Schematic_Elevator_Sector4.bmp</a></li>
+            <li><a href="5-act4BB.html">Personnel_Gilford_Incident.log</a></li>
+            <li><a href="6-act1SERPH.html">Financial_Project_OAI_Q3.xls</a></li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var query = urlParams.get('q');
+        if (query) {
+            document.getElementById('searchBar').value = query;
+            filterFiles();
+        }
+    };
+
+    function filterFiles() {
+        var input = document.getElementById('searchBar');
+        var filter = input.value.toUpperCase();
+        var ul = document.getElementById("file-list");
+        var li = ul.getElementsByTagName('li');
+
+        for (var i = 0; i < li.length; i++) {
+            var a = li[i].getElementsByTagName("a")[0];
+            var txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
